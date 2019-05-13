@@ -23,7 +23,7 @@ export default function isSafeToRun(rootPath: string): boolean {
 
   console.log(
     `The directory ${chalk.cyan(
-      path.dirname(rootPath),
+      path.basename(rootPath),
     )} contains files that could conflict:\n`,
   );
 
