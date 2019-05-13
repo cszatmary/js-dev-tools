@@ -5,6 +5,8 @@ import { cwd, exitFailure, exitSuccess } from './utils/processUtils';
 import isSafeToRun from './utils/isSafeToRun';
 import createConfigs from './utils/createConfigs';
 import getTools from './getTools';
+import install from './utils/install';
+import dependencies from './dependencies';
 
 interface CliOptions {
   force: boolean;
@@ -30,10 +32,16 @@ export default async function run(options: CliOptions): Promise<void> {
   const useYarn = fs.existsSync(path.join(targetDir, 'yarn.lock'));
   const tools = await getTools();
 
+  console.log('Creating config files...');
+
   createConfigs(tools).forEach(config => {
     const fileName = path.join(targetDir, config.name);
     fs.writeFileSync(fileName, config.value);
   });
+
+  console.log('Installing dependencies...');
+
+  await install(useYarn, dependencies(tools), targetDir);
 
   exitSuccess(`✅  Finished setting up tools. Enjoy!\n`);
 }
