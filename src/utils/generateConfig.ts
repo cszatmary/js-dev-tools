@@ -11,8 +11,12 @@ const babel = (useTypescript: boolean): string =>
     .filter(line => !/^\s+$/gm.test(line))
     .join('\n');
 
-const eslint = (useTypescript: boolean, usePrettier: boolean): string =>
-  createConfigFile(eslintConfig(useTypescript, usePrettier));
+const eslint = (
+  useTypescript: boolean,
+  useBabel: boolean,
+  usePrettier: boolean,
+): string =>
+  createConfigFile(eslintConfig(useTypescript, useBabel, usePrettier));
 
 const lintStaged = (
   useTypescript: boolean,

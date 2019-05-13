@@ -17,7 +17,11 @@ function parseName(name: string, tools: Tools): ConfigFile {
     case ToolTypes.eslint:
       return {
         name: '.eslintrc.js',
-        value: generateConfig.eslint(tools.typescript, tools.prettier),
+        value: generateConfig.eslint(
+          tools.typescript,
+          tools.babel,
+          tools.prettier,
+        ),
       };
     case ToolTypes.lintStaged:
       return {

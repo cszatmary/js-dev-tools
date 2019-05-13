@@ -1,10 +1,18 @@
-export default (useTypescript: boolean, usePrettier: boolean) => ({
-  parser: useTypescript ? '@typescript-eslint/parser' : 'babel-eslint',
-  parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: 'module',
-    ...(useTypescript ? { project: 'tsconfig.json' } : {}),
-  },
+export default (
+  useTypescript: boolean,
+  useBabel: boolean,
+  usePrettier: boolean,
+) => ({
+  ...(useBabel || useTypescript
+    ? {
+        parser: useTypescript ? '@typescript-eslint/parser' : 'babel-eslint',
+        parserOptions: {
+          ecmaVersion: 2018,
+          sourceType: 'module',
+          ...(useTypescript ? { project: 'tsconfig.json' } : {}),
+        },
+      }
+    : {}),
   env: {
     node: true,
     jest: true,
