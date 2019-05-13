@@ -25,7 +25,11 @@ process.env.NODE_ENV = args[0];
 const targetDir = path.join(process.cwd(), 'test-dir');
 const joinPath = name => path.join(targetDir, name);
 
-fs.emptyDirSync(targetDir);
+fs.ensureDirSync(targetDir);
+
+if (!args.includes('--no-clean')) {
+  fs.emptyDirSync(targetDir);
+}
 
 process.env.INIT_CWD = targetDir;
 
@@ -35,12 +39,19 @@ fs.createFileSync(joinPath('yarn.lock'));
 let command;
 let commandArgs;
 
+const force = args.includes('-f') || args.includes('--force');
+
 if (process.env.NODE_ENV === 'development') {
   command = require.resolve(`${paths.appNodeModules}/.bin/babel-node`);
-  commandArgs = ['--extensions', '.ts,.js', paths.appIndex];
+  commandArgs = [
+    '--extensions',
+    '.ts,.js',
+    paths.appIndex,
+    ...(force ? ['--force'] : []),
+  ];
 } else {
   command = 'node';
-  commandArgs = [paths.appBuildIndex];
+  commandArgs = [paths.appBuildIndex, ...(force ? ['--force'] : [])];
 }
 
 const result = spawnSync(command, commandArgs, {
