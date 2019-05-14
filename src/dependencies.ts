@@ -8,6 +8,7 @@ const babelDependencies = [
   '@babel/plugin-proposal-object-rest-spread',
   '@babel/plugin-transform-async-to-generator',
   '@babel/preset-env',
+  'babel-plugin-module-resolver',
 ];
 
 const eslintDependencies = (
@@ -18,7 +19,13 @@ const eslintDependencies = (
   'eslint',
   'eslint-config-airbnb',
   'eslint-plugin-import',
-  ...(useBabel ? ['babel-eslint', 'eslint-plugin-babel'] : []),
+  ...(useBabel
+    ? [
+        'babel-eslint',
+        'eslint-plugin-babel',
+        'eslint-import-resolver-babel-module',
+      ]
+    : []),
   ...(usePrettier ? ['eslint-config-prettier', 'eslint-plugin-prettier'] : []),
   ...(useTypescript
     ? ['@typescript-eslint/eslint-plugin', '@typescript-eslint/parser']

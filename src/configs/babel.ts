@@ -17,6 +17,13 @@ export default (useTypescript: boolean) => `module.exports = api => {
       '@babel/plugin-transform-async-to-generator',
       '@babel/plugin-proposal-class-properties',
       '@babel/plugin-proposal-object-rest-spread',
+      [
+        'babel-plugin-module-resolver',
+        {
+          root: ['.'],
+          alias: {},
+        },
+      ],
     ],
   };
 };

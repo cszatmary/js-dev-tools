@@ -47,4 +47,15 @@ export default (
     ...(usePrettier ? { 'prettier/prettier': ['error'] } : {}),
     'no-console': ['off'],
   },
+  ...(useBabel
+    ? {
+        settings: {
+          'import/resolver': {
+            'babel-module': {
+              extensions: ['.js', ...(useTypescript ? ['.ts'] : [])],
+            },
+          },
+        },
+      }
+    : {}),
 });
