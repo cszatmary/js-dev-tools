@@ -7,6 +7,7 @@ import createConfigs from './utils/createConfigs';
 import getTools from './getTools';
 import install from './utils/install';
 import dependencies from './dependencies';
+import addScripts from './addScripts';
 
 interface CliOptions {
   force: boolean;
@@ -38,6 +39,10 @@ export default async function run(options: CliOptions): Promise<void> {
     const fileName = path.join(targetDir, config.name);
     fs.writeFileSync(fileName, config.value);
   });
+
+  const packageJson = fs.readJsonSync(packageJsonPath);
+  addScripts(packageJson, tools);
+  fs.writeJsonSync(packageJsonPath, packageJson);
 
   console.log('Installing dependencies...');
 
