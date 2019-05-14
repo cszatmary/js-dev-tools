@@ -1,6 +1,6 @@
 {
   "name": "@cszatma/js-dev-tools",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CLI to setup development tools such as eslint, prettier, etc.",
   "keywords": [
     "dev tools",
