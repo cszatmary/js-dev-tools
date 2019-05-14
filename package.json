@@ -18,7 +18,7 @@
   },
   "license": "MIT",
   "bin": {
-    "config-gen": "build/index.js"
+    "js-dev-tools": "build/index.js"
   },
   "files": [
     "build/"
