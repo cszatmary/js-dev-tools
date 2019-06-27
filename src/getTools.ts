@@ -8,6 +8,7 @@ export interface Tools {
   lintStaged: boolean;
   prettier: boolean;
   typescript: boolean;
+  typescriptBabel: boolean;
   [key: string]: boolean;
 }
 
@@ -17,10 +18,12 @@ export default async function(): Promise<Tools> {
 
   return {
     babel:
-      transpiler === ToolTypes.babel || transpiler === ToolTypes.typescript,
+      transpiler === ToolTypes.babel ||
+      transpiler === ToolTypes.typescriptBabel,
     eslint: selectedTools.includes(ToolTypes.eslint),
     lintStaged: selectedTools.includes(ToolTypes.lintStaged),
     prettier: selectedTools.includes(ToolTypes.prettier),
     typescript: transpiler === ToolTypes.typescript,
+    typescriptBabel: transpiler === ToolTypes.typescriptBabel,
   };
 }

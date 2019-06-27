@@ -1,14 +1,12 @@
 export default {
   compilerOptions: {
-    module: 'commonjs',
-    esModuleInterop: true,
-    target: 'es2016',
-    lib: ['es7'],
-    strict: true,
+    target: 'esnext',
     moduleResolution: 'node',
-    sourceMap: false,
-    rootDir: 'src',
-    outDir: 'build',
+    allowJs: true,
+    noEmit: true,
+    strict: true,
+    isolatedModules: true,
+    esModuleInterop: true,
     baseUrl: '.',
     paths: {
       '*': ['node_modules/*', 'src/types/*'],

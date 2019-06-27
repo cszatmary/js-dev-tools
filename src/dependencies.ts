@@ -1,6 +1,6 @@
 import { Tools } from './getTools';
 
-const babelDependencies = [
+const babelDependencies = (useTypescript: boolean): string[] => [
   '@babel/cli',
   '@babel/core',
   '@babel/node',
@@ -9,6 +9,7 @@ const babelDependencies = [
   '@babel/plugin-transform-async-to-generator',
   '@babel/preset-env',
   'babel-plugin-module-resolver',
+  ...(useTypescript ? ['@babel/preset-typescript'] : []),
 ];
 
 const eslintDependencies = (
@@ -36,12 +37,14 @@ const lintStagedDependencies = ['husky', 'lint-staged'];
 
 const prettierDependencies = ['prettier'];
 
-const typescriptDependencies = ['@babel/preset-typescript', 'typescript'];
+const typescriptDependencies = ['typescript'];
 
 export default (tools: Tools): string[] => [
-  ...babelDependencies,
-  ...eslintDependencies(tools.typescript, tools.babel, tools.prettier),
-  ...lintStagedDependencies,
-  ...prettierDependencies,
-  ...typescriptDependencies,
+  ...(tools.babel ? babelDependencies(tools.typescriptBabel) : []),
+  ...(tools.eslint
+    ? eslintDependencies(tools.typescript, tools.babel, tools.prettier)
+    : []),
+  ...(tools.lintStaged ? lintStagedDependencies : []),
+  ...(tools.prettier ? prettierDependencies : []),
+  ...(tools.typescript ? typescriptDependencies : []),
 ];

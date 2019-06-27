@@ -3,6 +3,7 @@ import eslintConfig from '../configs/eslint';
 import lintStagedConfig from '../configs/lintStaged';
 import prettierConfig from '../configs/prettier';
 import tsConfig from '../configs/tsconfig';
+import tsConfigBabel from '../configs/tsconfig.babel';
 import createConfigFile from './createConfigFile';
 
 const babel = (useTypescript: boolean): string =>
@@ -29,10 +30,13 @@ const prettier = (): string => createConfigFile(prettierConfig);
 
 const typescript = (): string => JSON.stringify(tsConfig, null, 2);
 
+const typescriptBabel = (): string => JSON.stringify(tsConfigBabel, null, 2);
+
 export default {
   babel,
   eslint,
   lintStaged,
   prettier,
   typescript,
+  typescriptBabel,
 };

@@ -5,16 +5,23 @@ export default function(packageJson: any, tools: Tools): void {
     ...(tools.babel
       ? {
           build: `babel src -d build ${
-            tools.typescript ? "--extensions '.js,.ts'" : ''
+            tools.typescriptBabel ? "--extensions '.js,.ts'" : ''
           }`,
         }
       : {}),
-    ...(tools.typescript ? { 'check-types': 'tsc' } : {}),
+    ...(tools.typescript
+      ? {
+          build: 'tsc',
+        }
+      : {}),
+    ...(tools.typescriptBabel ? { 'check-types': 'tsc' } : {}),
     ...(tools.eslint
       ? {
-          lint: `eslint ${tools.typescript ? '--ext=js,ts' : ''} ./src`,
+          lint: `eslint ${
+            tools.typescript || tools.typescriptBabel ? '--ext=js,ts' : ''
+          } ./src`,
           'lint:fix': `eslint --fix ${
-            tools.typescript ? '--ext=js,ts' : ''
+            tools.typescript || tools.typescriptBabel ? '--ext=js,ts' : ''
           } ./src`,
         }
       : {}),

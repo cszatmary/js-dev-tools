@@ -42,7 +42,7 @@ export default async function run(options: CliOptions): Promise<void> {
 
   const packageJson = fs.readJsonSync(packageJsonPath);
   addScripts(packageJson, tools);
-  fs.writeJsonSync(packageJsonPath, packageJson);
+  fs.writeJsonSync(packageJsonPath, packageJson, { spaces: 2 });
 
   console.log('Installing dependencies...');
 

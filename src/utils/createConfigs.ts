@@ -42,6 +42,11 @@ function parseName(name: string, tools: Tools): ConfigFile {
         name: 'tsconfig.json',
         value: generateConfig.typescript(),
       };
+    case ToolTypes.typescriptBabel:
+      return {
+        name: 'tsconfig.json',
+        value: generateConfig.typescriptBabel(),
+      };
     default:
       throw new Error(`Invalid tool name: ${name}`);
   }
