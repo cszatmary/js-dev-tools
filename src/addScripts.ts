@@ -1,4 +1,4 @@
-import { Tools } from './getTools';
+import { Tools } from './utils/tools';
 
 export default function(packageJson: any, tools: Tools): void {
   const scripts = {

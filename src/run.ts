@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
+import { cwd, exitFailure, exitSuccess } from '@cszatma/process-utils';
 
-import { cwd, exitFailure, exitSuccess } from './utils/processUtils';
 import isSafeToRun from './utils/isSafeToRun';
 import createConfigs from './utils/createConfigs';
 import getTools from './getTools';
@@ -48,5 +48,5 @@ export default async function run(options: CliOptions): Promise<void> {
 
   await install(useYarn, dependencies(tools), targetDir);
 
-  exitSuccess(`✅  Finished setting up tools. Enjoy!\n`);
+  exitSuccess('✅  Finished setting up tools. Enjoy!\n');
 }

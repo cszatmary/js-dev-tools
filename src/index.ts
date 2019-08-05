@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 /* eslint-disable */
-// @ts-ignore
 
 var chalk = require('chalk');
 var semver = require('semver');

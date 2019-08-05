@@ -1,12 +1,10 @@
-import { Tools } from './getTools';
+import { Tools } from './utils/tools';
 
 const babelDependencies = (useTypescript: boolean): string[] => [
   '@babel/cli',
   '@babel/core',
   '@babel/node',
   '@babel/plugin-proposal-class-properties',
-  '@babel/plugin-proposal-object-rest-spread',
-  '@babel/plugin-transform-async-to-generator',
   '@babel/preset-env',
   'babel-plugin-module-resolver',
   ...(useTypescript ? ['@babel/preset-typescript'] : []),
@@ -20,16 +18,17 @@ const eslintDependencies = (
   'eslint',
   'eslint-config-airbnb',
   'eslint-plugin-import',
-  ...(useBabel
-    ? [
-        'babel-eslint',
-        'eslint-plugin-babel',
-        'eslint-import-resolver-babel-module',
-      ]
+  ...(useBabel && !useTypescript
+    ? ['babel-eslint', 'eslint-plugin-babel']
     : []),
+  ...(useBabel ? ['eslint-import-resolver-babel-module'] : []),
   ...(usePrettier ? ['eslint-config-prettier', 'eslint-plugin-prettier'] : []),
   ...(useTypescript
-    ? ['@typescript-eslint/eslint-plugin', '@typescript-eslint/parser']
+    ? [
+        '@typescript-eslint/eslint-plugin',
+        '@typescript-eslint/parser',
+        'eslint-import-resolver-typescript',
+      ]
     : []),
 ];
 

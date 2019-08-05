@@ -10,6 +10,7 @@ export default {
     baseUrl: '.',
     paths: {
       '*': ['node_modules/*', 'src/types/*'],
+      '~/*': ['src/*'],
     },
   },
   include: ['src'],

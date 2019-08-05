@@ -47,13 +47,19 @@ export default (
     ...(usePrettier ? { 'prettier/prettier': ['error'] } : {}),
     'no-console': ['off'],
   },
-  ...(useBabel
+  ...(useBabel || useTypescript
     ? {
         settings: {
           'import/resolver': {
-            'babel-module': {
-              extensions: ['.js', ...(useTypescript ? ['.ts'] : [])],
-            },
+            ...(useBabel
+              ? {
+                  'babel-module': {
+                    extensions: ['.js'],
+                  },
+                }
+              : {
+                  typescript: {},
+                }),
           },
         },
       }

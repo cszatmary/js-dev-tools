@@ -1,16 +1,6 @@
 import chooseTranspiler from './prompts/chooseTranspiler';
 import chooseToolsPrompt from './prompts/chooseTools';
-import ToolTypes from './utils/ToolTypes';
-
-export interface Tools {
-  babel: boolean;
-  eslint: boolean;
-  lintStaged: boolean;
-  prettier: boolean;
-  typescript: boolean;
-  typescriptBabel: boolean;
-  [key: string]: boolean;
-}
+import { Tools, ToolTypes } from './utils/tools';
 
 export default async function(): Promise<Tools> {
   const transpiler = await chooseTranspiler();
