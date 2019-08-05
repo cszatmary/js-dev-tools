@@ -42,13 +42,8 @@ let commandArgs;
 const force = args.includes('-f') || args.includes('--force');
 
 if (process.env.NODE_ENV === 'development') {
-  command = require.resolve(`${paths.appNodeModules}/.bin/babel-node`);
-  commandArgs = [
-    '--extensions',
-    '.ts,.js',
-    paths.appIndex,
-    ...(force ? ['--force'] : []),
-  ];
+  command = require.resolve(`${paths.appNodeModules}/.bin/ts-node`);
+  commandArgs = [paths.appIndex, ...(force ? ['--force'] : [])];
 } else {
   command = 'node';
   commandArgs = [paths.appBuildIndex, ...(force ? ['--force'] : [])];

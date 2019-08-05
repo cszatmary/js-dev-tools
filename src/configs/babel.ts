@@ -1,30 +1,25 @@
-export default (useTypescript: boolean) => `module.exports = api => {
-  api.cache(true);
-
-  return {
-    presets: [
-      [
-        '@babel/preset-env',
-        {
-          targets: {
-            node: true,
-          },
+export default (useTypescript: boolean) => ({
+  presets: [
+    [
+      '@babel/env',
+      {
+        targets: {
+          node: '12',
         },
-      ],
-      ${useTypescript ? `['@babel/preset-typescript'],` : ''}
+      },
     ],
-    plugins: [
-      '@babel/plugin-transform-async-to-generator',
-      '@babel/plugin-proposal-class-properties',
-      '@babel/plugin-proposal-object-rest-spread',
-      [
-        'babel-plugin-module-resolver',
-        {
-          root: ['.'],
-          alias: {},
+    ...(useTypescript ? ['@babel/typescript'] : []),
+  ],
+  plugins: [
+    [
+      'module-resolver',
+      {
+        root: ['.'],
+        alias: {
+          '~': './src',
         },
-      ],
+        extensions: ['.js', ...(useTypescript ? ['.ts'] : [])],
+      },
     ],
-  };
-};
-`;
+  ],
+});

@@ -1,14 +1,14 @@
-import { prompt, Question } from 'inquirer';
+import { prompt, ListQuestion } from 'inquirer';
 
-import ToolTypes from '../utils/ToolTypes';
+import { ToolTypes } from '../utils/tools';
 
-export type Transpiler = 'babel' | 'typescript' | 'none';
+export type Transpiler = 'babel' | 'typescript' | 'typescriptBabel' | 'none';
 
 interface Answer {
   transpiler: Transpiler;
 }
 
-const useTypescriptQuestion: Question<Answer> = {
+const useTypescriptQuestion: ListQuestion<Answer> = {
   name: 'transpiler',
   type: 'list',
   message: 'Choose which transpiler to use?',
@@ -18,8 +18,12 @@ const useTypescriptQuestion: Question<Answer> = {
       value: ToolTypes.babel,
     },
     {
-      name: 'TypeScript + Babel',
+      name: 'TypeScript',
       value: ToolTypes.typescript,
+    },
+    {
+      name: 'TypeScript + Babel',
+      value: ToolTypes.typescriptBabel,
     },
     {
       name: 'None',

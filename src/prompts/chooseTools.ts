@@ -1,12 +1,12 @@
-import { prompt, Question } from 'inquirer';
+import { prompt, CheckboxQuestion } from 'inquirer';
 
-import ToolTypes from '../utils/ToolTypes';
+import { ToolTypes } from '../utils/tools';
 
 interface Answer {
   tools: string[];
 }
 
-const chooseToolsQuestion: Question<Answer> = {
+const chooseToolsQuestion: CheckboxQuestion<Answer> = {
   name: 'tools',
   type: 'checkbox',
   message: 'Select which tools to use:',

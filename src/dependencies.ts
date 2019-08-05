@@ -1,14 +1,13 @@
-import { Tools } from './getTools';
+import { Tools } from './utils/tools';
 
-const babelDependencies = [
+const babelDependencies = (useTypescript: boolean): string[] => [
   '@babel/cli',
   '@babel/core',
   '@babel/node',
   '@babel/plugin-proposal-class-properties',
-  '@babel/plugin-proposal-object-rest-spread',
-  '@babel/plugin-transform-async-to-generator',
   '@babel/preset-env',
   'babel-plugin-module-resolver',
+  ...(useTypescript ? ['@babel/preset-typescript'] : []),
 ];
 
 const eslintDependencies = (
@@ -19,7 +18,7 @@ const eslintDependencies = (
   'eslint',
   'eslint-config-airbnb',
   'eslint-plugin-import',
-  ...(useBabel
+  ...(useBabel && !useTypescript
     ? [
         'babel-eslint',
         'eslint-plugin-babel',
@@ -28,7 +27,11 @@ const eslintDependencies = (
     : []),
   ...(usePrettier ? ['eslint-config-prettier', 'eslint-plugin-prettier'] : []),
   ...(useTypescript
-    ? ['@typescript-eslint/eslint-plugin', '@typescript-eslint/parser']
+    ? [
+        '@typescript-eslint/eslint-plugin',
+        '@typescript-eslint/parser',
+        'eslint-import-resolver-typescript',
+      ]
     : []),
 ];
 
@@ -36,12 +39,18 @@ const lintStagedDependencies = ['husky', 'lint-staged'];
 
 const prettierDependencies = ['prettier'];
 
-const typescriptDependencies = ['@babel/preset-typescript', 'typescript'];
+const typescriptDependencies = ['typescript'];
 
 export default (tools: Tools): string[] => [
-  ...babelDependencies,
-  ...eslintDependencies(tools.typescript, tools.babel, tools.prettier),
-  ...lintStagedDependencies,
-  ...prettierDependencies,
-  ...typescriptDependencies,
+  ...(tools.babel ? babelDependencies(tools.typescriptBabel) : []),
+  ...(tools.eslint
+    ? eslintDependencies(
+        tools.typescript || tools.typescriptBabel,
+        tools.babel,
+        tools.prettier,
+      )
+    : []),
+  ...(tools.lintStaged ? lintStagedDependencies : []),
+  ...(tools.prettier ? prettierDependencies : []),
+  ...(tools.typescript ? typescriptDependencies : []),
 ];
