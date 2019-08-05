@@ -17,26 +17,26 @@ function parseName(name: string, tools: Tools): ConfigFile {
   switch (name) {
     case ToolTypes.babel:
       return {
-        name: '.babelrc.js',
+        name: '.babelrc',
         value: stringify(babelConfig(tools.typescript)),
       };
     case ToolTypes.eslint:
       return {
-        name: '.eslintrc.js',
+        name: '.eslintrc',
         value: stringify(
           eslintConfig(tools.typescript, tools.babel, tools.prettier),
         ),
       };
     case ToolTypes.lintStaged:
       return {
-        name: 'lint-staged.config.js',
+        name: '.lintstagedrc',
         value: stringify(
           lintStagedConfig(tools.typescript, tools.eslint, tools.prettier),
         ),
       };
     case ToolTypes.prettier:
       return {
-        name: 'prettier.config.js',
+        name: '.prettierrc',
         value: stringify(prettierConfig),
       };
     case ToolTypes.typescript:
