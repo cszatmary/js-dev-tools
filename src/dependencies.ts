@@ -19,9 +19,12 @@ const eslintDependencies = (
   'eslint-config-airbnb',
   'eslint-plugin-import',
   ...(useBabel && !useTypescript
-    ? ['babel-eslint', 'eslint-plugin-babel']
+    ? [
+        'babel-eslint',
+        'eslint-plugin-babel',
+        'eslint-import-resolver-babel-module',
+      ]
     : []),
-  ...(useBabel ? ['eslint-import-resolver-babel-module'] : []),
   ...(usePrettier ? ['eslint-config-prettier', 'eslint-plugin-prettier'] : []),
   ...(useTypescript
     ? [
@@ -41,7 +44,11 @@ const typescriptDependencies = ['typescript'];
 export default (tools: Tools): string[] => [
   ...(tools.babel ? babelDependencies(tools.typescriptBabel) : []),
   ...(tools.eslint
-    ? eslintDependencies(tools.typescript, tools.babel, tools.prettier)
+    ? eslintDependencies(
+        tools.typescript || tools.typescriptBabel,
+        tools.babel,
+        tools.prettier,
+      )
     : []),
   ...(tools.lintStaged ? lintStagedDependencies : []),
   ...(tools.prettier ? prettierDependencies : []),
