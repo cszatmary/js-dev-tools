@@ -38,12 +38,10 @@
     eslint-config-airbnb-base "^14.1.0"
     eslint-config-prettier "^6.10.1"
 
-"@cszatma/process-utils@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@cszatma/process-utils/-/process-utils-0.2.0.tgz#a2dc8e243d08bd449afe2df94eb73143adaef075"
-  integrity sha512-gVWyOPxZ7cDvBpO45pfN+Wcs88alCrxZY1Osnp4Ob1NbyWi1VAZ6NJu2vvVMZMtOpqSF3vqs7c756+k8yINE7g==
-  dependencies:
-    chalk "^3.0.0"
+"@cszatma/node-stdlib@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@cszatma/node-stdlib/-/node-stdlib-0.1.0.tgz#d2d0e0e556e75c678f487cb0a32c31414dd1b363"
+  integrity sha512-jDPcpQ2yO6CAXI15YIt3fOfv3SNsUDdrPGST0KP50omAgUhwxobW++3dMDklTLa4le/6PxcGWUocKiTYNtJKTA==
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"

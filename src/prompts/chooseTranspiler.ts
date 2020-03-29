@@ -1,8 +1,6 @@
 import { prompt, ListQuestion } from "inquirer";
 
-import { ToolTypes } from "../utils/tools";
-
-export type Transpiler = "babel" | "typescript" | "typescriptBabel" | "none";
+export type Transpiler = "babel" | "typescript" | "typescript + babel" | "none";
 
 interface Answer {
   transpiler: Transpiler;
@@ -15,15 +13,15 @@ const useTypescriptQuestion: ListQuestion<Answer> = {
   choices: [
     {
       name: "Babel",
-      value: ToolTypes.babel,
+      value: "babel",
     },
     {
       name: "TypeScript",
-      value: ToolTypes.typescript,
+      value: "typescript",
     },
     {
       name: "TypeScript + Babel",
-      value: ToolTypes.typescriptBabel,
+      value: "typescript + babel",
     },
     {
       name: "None",
@@ -32,7 +30,7 @@ const useTypescriptQuestion: ListQuestion<Answer> = {
   ],
 };
 
-export default async function chooseTranspiler(): Promise<Transpiler> {
+export async function chooseTranspiler(): Promise<Transpiler> {
   const { transpiler } = await prompt<Answer>(useTypescriptQuestion);
 
   return transpiler;

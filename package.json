@@ -41,7 +41,7 @@
     "prepublishOnly": "yarn clean && yarn build"
   },
   "dependencies": {
-    "@cszatma/process-utils": "^0.2.0",
+    "@cszatma/node-stdlib": "^0.1.0",
     "chalk": "^3.0.0",
     "commander": "^5.0.0",
     "fs-extra": "^9.0.0",
@@ -66,7 +66,9 @@
     "typescript": "^3.8.3"
   },
   "eslintConfig": {
-    "extends": ["@cszatma"]
+    "extends": [
+      "@cszatma"
+    ]
   },
   "husky": {
     "hooks": {

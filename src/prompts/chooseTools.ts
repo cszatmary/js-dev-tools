@@ -1,9 +1,9 @@
 import { prompt, CheckboxQuestion } from "inquirer";
 
-import { ToolTypes } from "../utils/tools";
+export type Tool = "eslint" | "lint-staged" | "prettier";
 
 interface Answer {
-  tools: string[];
+  tools: Tool[];
 }
 
 const chooseToolsQuestion: CheckboxQuestion<Answer> = {
@@ -13,21 +13,21 @@ const chooseToolsQuestion: CheckboxQuestion<Answer> = {
   choices: [
     {
       name: "ESLint",
-      value: ToolTypes.eslint,
+      value: "eslint",
     },
     {
       name: "lint-staged",
-      value: ToolTypes.lintStaged,
+      value: "lint-staged",
     },
     {
       name: "Prettier",
-      value: ToolTypes.prettier,
+      value: "prettier",
     },
   ],
 };
 
-export default async function chooseToolsPrompt(): Promise<string[]> {
+export async function chooseToolsPrompt(): Promise<Set<Tool>> {
   const { tools } = await prompt<Answer>(chooseToolsQuestion);
 
-  return tools;
+  return new Set(tools);
 }

@@ -8,11 +8,7 @@
     "moduleResolution": "node",
     "sourceMap": false,
     "rootDir": "src",
-    "outDir": "build",
-    "baseUrl": ".",
-    "paths": {
-      "*": ["node_modules/*", "src/types/*"]
-    }
+    "outDir": "build"
   },
   "include": ["src"],
   "exclude": ["node_modules", "build"]

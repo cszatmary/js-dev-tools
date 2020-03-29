@@ -1,16 +1,20 @@
 #!/usr/bin/env node
 
-/* eslint-disable */
+/* eslint-disable no-var */
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable prefer-template */
 
 var chalk = require("chalk");
-var semver = require("semver");
 
-var currentNodeVersion = process.versions.node;
+var nodeVersion = process.versions.node;
+var majorVersion = parseInt(nodeVersion.split(".")[0], 10);
 
-if (semver.lt(currentNodeVersion, "8.0.0")) {
+if (majorVersion < 10) {
   console.log(
     chalk.red(
-      `You are running Node ${currentNodeVersion}.\n` +
+      "You are running Node " +
+        nodeVersion +
+        ".\n" +
         "config-gen requires Node 8 or higher.\n" +
         "Please update your version of Node.",
     ),
