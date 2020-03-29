@@ -1,26 +1,26 @@
-import { prompt, CheckboxQuestion } from 'inquirer';
+import { prompt, CheckboxQuestion } from "inquirer";
 
-import { ToolTypes } from '../utils/tools';
+import { ToolTypes } from "../utils/tools";
 
 interface Answer {
   tools: string[];
 }
 
 const chooseToolsQuestion: CheckboxQuestion<Answer> = {
-  name: 'tools',
-  type: 'checkbox',
-  message: 'Select which tools to use:',
+  name: "tools",
+  type: "checkbox",
+  message: "Select which tools to use:",
   choices: [
     {
-      name: 'ESLint',
+      name: "ESLint",
       value: ToolTypes.eslint,
     },
     {
-      name: 'lint-staged',
+      name: "lint-staged",
       value: ToolTypes.lintStaged,
     },
     {
-      name: 'Prettier',
+      name: "Prettier",
       value: ToolTypes.prettier,
     },
   ],

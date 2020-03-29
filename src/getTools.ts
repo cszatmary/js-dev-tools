@@ -1,8 +1,8 @@
-import chooseTranspiler from './prompts/chooseTranspiler';
-import chooseToolsPrompt from './prompts/chooseTools';
-import { Tools, ToolTypes } from './utils/tools';
+import chooseTranspiler from "./prompts/chooseTranspiler";
+import chooseToolsPrompt from "./prompts/chooseTools";
+import { Tools, ToolTypes } from "./utils/tools";
 
-export default async function(): Promise<Tools> {
+export default async function (): Promise<Tools> {
   const transpiler = await chooseTranspiler();
   const selectedTools = await chooseToolsPrompt();
 

@@ -1,10 +1,10 @@
-import { Tools, ToolTypes } from './tools';
-import babelConfig from '../configs/babel';
-import eslintConfig from '../configs/eslint';
-import lintStagedConfig from '../configs/lintStaged';
-import prettierConfig from '../configs/prettier';
-import tsConfig from '../configs/tsconfig';
-import tsConfigBabel from '../configs/tsconfig.babel';
+import { Tools, ToolTypes } from "./tools";
+import babelConfig from "../configs/babel";
+import eslintConfig from "../configs/eslint";
+import lintStagedConfig from "../configs/lintStaged";
+import prettierConfig from "../configs/prettier";
+import tsConfig from "../configs/tsconfig";
+import tsConfigBabel from "../configs/tsconfig.babel";
 
 const stringify = (obj: any): string => JSON.stringify(obj, null, 2);
 
@@ -17,36 +17,36 @@ function parseName(name: string, tools: Tools): ConfigFile {
   switch (name) {
     case ToolTypes.babel:
       return {
-        name: '.babelrc',
+        name: ".babelrc",
         value: stringify(babelConfig(tools.typescript)),
       };
     case ToolTypes.eslint:
       return {
-        name: '.eslintrc',
+        name: ".eslintrc",
         value: stringify(
           eslintConfig(tools.typescript, tools.babel, tools.prettier),
         ),
       };
     case ToolTypes.lintStaged:
       return {
-        name: '.lintstagedrc',
+        name: ".lintstagedrc",
         value: stringify(
           lintStagedConfig(tools.typescript, tools.eslint, tools.prettier),
         ),
       };
     case ToolTypes.prettier:
       return {
-        name: '.prettierrc',
+        name: ".prettierrc",
         value: stringify(prettierConfig),
       };
     case ToolTypes.typescript:
       return {
-        name: 'tsconfig.json',
+        name: "tsconfig.json",
         value: stringify(tsConfig),
       };
     case ToolTypes.typescriptBabel:
       return {
-        name: 'tsconfig.json',
+        name: "tsconfig.json",
         value: stringify(tsConfigBabel),
       };
     default:
@@ -56,5 +56,5 @@ function parseName(name: string, tools: Tools): ConfigFile {
 
 export default (tools: Tools): ConfigFile[] =>
   Object.keys(tools)
-    .filter(name => tools[name])
-    .map(name => parseName(name, tools));
+    .filter((name) => tools[name])
+    .map((name) => parseName(name, tools));

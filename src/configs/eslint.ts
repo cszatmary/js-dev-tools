@@ -5,11 +5,11 @@ export default (
 ) => ({
   ...(useBabel || useTypescript
     ? {
-        parser: useTypescript ? '@typescript-eslint/parser' : 'babel-eslint',
+        parser: useTypescript ? "@typescript-eslint/parser" : "babel-eslint",
         parserOptions: {
           ecmaVersion: 2018,
-          sourceType: 'module',
-          ...(useTypescript ? { project: 'tsconfig.json' } : {}),
+          sourceType: "module",
+          ...(useTypescript ? { project: "tsconfig.json" } : {}),
         },
       }
     : {}),
@@ -18,43 +18,43 @@ export default (
     jest: true,
   },
   extends: [
-    'airbnb/base',
-    ...(usePrettier ? ['prettier'] : []),
-    'plugin:import/errors',
-    'plugin:import/warnings',
+    "airbnb/base",
+    ...(usePrettier ? ["prettier"] : []),
+    "plugin:import/errors",
+    "plugin:import/warnings",
     ...(useTypescript
-      ? ['plugin:import/typescript', 'plugin:@typescript-eslint/recommended']
+      ? ["plugin:import/typescript", "plugin:@typescript-eslint/recommended"]
       : []),
-    ...(useTypescript && usePrettier ? ['prettier/@typescript-eslint'] : []),
+    ...(useTypescript && usePrettier ? ["prettier/@typescript-eslint"] : []),
   ],
   plugins: [
-    ...(useTypescript ? ['@typescript-eslint'] : []),
-    ...(usePrettier ? ['prettier'] : []),
+    ...(useTypescript ? ["@typescript-eslint"] : []),
+    ...(usePrettier ? ["prettier"] : []),
   ],
   rules: {
     ...(useTypescript
       ? {
-          '@typescript-eslint/no-var-requires': ['off'],
-          '@typescript-eslint/explicit-function-return-type': [
-            'error',
+          "@typescript-eslint/no-var-requires": ["off"],
+          "@typescript-eslint/explicit-function-return-type": [
+            "error",
             { allowExpressions: true, allowTypedFunctionExpressions: true },
           ],
-          '@typescript-eslint/no-explicit-any': ['off'],
+          "@typescript-eslint/no-explicit-any": ["off"],
         }
       : {}),
-    'import/no-extraneous-dependencies': ['off'],
-    'import/order': ['off'],
-    ...(usePrettier ? { 'prettier/prettier': ['error'] } : {}),
-    'no-console': ['off'],
+    "import/no-extraneous-dependencies": ["off"],
+    "import/order": ["off"],
+    ...(usePrettier ? { "prettier/prettier": ["error"] } : {}),
+    "no-console": ["off"],
   },
   ...(useBabel || useTypescript
     ? {
         settings: {
-          'import/resolver': {
+          "import/resolver": {
             ...(useBabel
               ? {
-                  'babel-module': {
-                    extensions: ['.js'],
+                  "babel-module": {
+                    extensions: [".js"],
                   },
                 }
               : {

@@ -1,27 +1,27 @@
-import { Tools } from './utils/tools';
+import { Tools } from "./utils/tools";
 
-export default function(packageJson: any, tools: Tools): void {
+export default function (packageJson: any, tools: Tools): void {
   const scripts = {
     ...(tools.babel
       ? {
           build: `babel src -d build ${
-            tools.typescriptBabel ? "--extensions '.js,.ts'" : ''
+            tools.typescriptBabel ? "--extensions '.js,.ts'" : ""
           }`,
         }
       : {}),
     ...(tools.typescript
       ? {
-          build: 'tsc',
+          build: "tsc",
         }
       : {}),
-    ...(tools.typescriptBabel ? { 'check-types': 'tsc' } : {}),
+    ...(tools.typescriptBabel ? { "check-types": "tsc" } : {}),
     ...(tools.eslint
       ? {
           lint: `eslint ${
-            tools.typescript || tools.typescriptBabel ? '--ext=js,ts' : ''
+            tools.typescript || tools.typescriptBabel ? "--ext=js,ts" : ""
           } ./src`,
-          'lint:fix': `eslint --fix ${
-            tools.typescript || tools.typescriptBabel ? '--ext=js,ts' : ''
+          "lint:fix": `eslint --fix ${
+            tools.typescript || tools.typescriptBabel ? "--ext=js,ts" : ""
           } ./src`,
         }
       : {}),

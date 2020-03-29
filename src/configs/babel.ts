@@ -1,24 +1,24 @@
 export default (useTypescript: boolean) => ({
   presets: [
     [
-      '@babel/env',
+      "@babel/env",
       {
         targets: {
-          node: '12',
+          node: "12",
         },
       },
     ],
-    ...(useTypescript ? ['@babel/typescript'] : []),
+    ...(useTypescript ? ["@babel/typescript"] : []),
   ],
   plugins: [
     [
-      'module-resolver',
+      "module-resolver",
       {
-        root: ['.'],
+        root: ["."],
         alias: {
-          '~': './src',
+          "~": "./src",
         },
-        extensions: ['.js', ...(useTypescript ? ['.ts'] : [])],
+        extensions: [".js", ...(useTypescript ? [".ts"] : [])],
       },
     ],
   ],
