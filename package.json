@@ -24,7 +24,7 @@
     "build/"
   ],
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "publishConfig": {
     "access": "public"
@@ -33,6 +33,7 @@
     "build": "tsc",
     "clean": "rimraf build && rimraf test-dir",
     "cleanup": "node scripts/cleanup.js",
+    "fmt": "prettier --write '{src,tests}/**/*.ts'",
     "js-dev-tools": "node scripts/run.js production",
     "js-dev-tools:dev": "node scripts/run.js development",
     "lint": "eslint --ext=js,ts ./src",
@@ -40,32 +41,44 @@
     "prepublishOnly": "yarn clean && yarn build"
   },
   "dependencies": {
-    "@cszatma/process-utils": "^0.1.2",
-    "chalk": "^2.4.2",
-    "commander": "^2.20.0",
-    "fs-extra": "^8.1.0",
-    "inquirer": "^6.5.0"
+    "@cszatma/process-utils": "^0.2.0",
+    "chalk": "^3.0.0",
+    "commander": "^5.0.0",
+    "fs-extra": "^9.0.0",
+    "inquirer": "^7.1.0"
   },
   "devDependencies": {
-    "@cszatma/eslint-config": "^0.2.2",
-    "@types/fs-extra": "^8.0.0",
+    "@cszatma/eslint-config": "^0.5.0",
+    "@types/fs-extra": "^8.1.0",
     "@types/inquirer": "^6.5.0",
     "@types/node": "^12.6.9",
-    "@typescript-eslint/eslint-plugin": "^1.13.0",
-    "eslint": "^6.1.0",
-    "eslint-import-resolver-typescript": "^1.1.1",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-prettier": "^3.1.0",
-    "husky": "^3.0.2",
-    "lint-staged": "^9.2.1",
-    "prettier": "^1.18.2",
-    "rimraf": "^2.6.3",
-    "ts-node": "^8.3.0",
-    "typescript": "^3.5.3"
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
+    "@typescript-eslint/parser": "^2.25.0",
+    "eslint": "^6.8.0",
+    "eslint-import-resolver-typescript": "^2.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.9",
+    "prettier": "^2.0.2",
+    "rimraf": "^3.0.2",
+    "ts-node": "^8.8.1",
+    "typescript": "^3.8.3"
+  },
+  "eslintConfig": {
+    "extends": ["@cszatma"]
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.{js,ts,json}": [
+      "prettier --write"
+    ]
+  },
+  "prettier": {
+    "trailingComma": "all"
   }
 }
